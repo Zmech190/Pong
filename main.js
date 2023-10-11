@@ -1,23 +1,27 @@
 var ball;
 var edges;
 var jugador1;
+var largo;
+var ancho;
 var jugador2;
 var score1=0;
 var score2=0;
 var status="play"
 function setup() {
-  createCanvas(450, 400);
+    largo=screen.height-70;
+    ancho=screen.width;
+  createCanvas(ancho, largo);
     ball=createSprite(100, 250, 50, 15)
-    jugador1=createSprite(35, 200, 25, 65)
-    jugador2=createSprite(415, 200, 25, 65)
+    jugador1=createSprite(35, largo/2, 25, 120)
+    jugador2=createSprite(ancho-35, largo/2, 25, 120)
 ball.shapeColor = "black";
     jugador1.shapeColor = "white"
     jugador2.shapeColor = "white"
     ball.addImage("ball",corazon)
     ball.scale= 0.2
     edges=createEdgeSprites();
-    ball.velocityY = 5;
-    ball.velocityX = 10;
+    ball.velocityY = 19;
+    ball.velocityX = 23;
     pongmusic.play()
 
 
@@ -38,11 +42,11 @@ function draw() {
 
 jugador2.y=ball.y
 if(keyDown(UP_ARROW)){
-    jugador1.y=jugador1.y-6
+    jugador1.y=jugador1.y-17
     
 }
 if(keyDown(DOWN_ARROW)){
-    jugador1.y=jugador1.y+6
+    jugador1.y=jugador1.y+17
 }
 if(ball.isTouching(edges[0])){
     status="game over"
@@ -55,24 +59,24 @@ if(ball.isTouching(edges[0])){
 if(status=="game over"){
     fill("white")
     textSize(45)
-    text("PERDISTE",110, 170)    
+    text("PERDISTE",(ancho/2)-135, (largo/2)-30)    
     textSize(25)
     textWrap(WORD)
-    text("reinicia la pagina para continuar",110, 200, 300)
+    text("reinicia la pagina para continuar",(ancho/2)-135, largo/2, 300)
     
     
 }
 if(status=="play"){
     fill("white")
-    for(x=0; x<450; x=x+30){
-        rect(x, 200, 20, 10)
+    for(x=0; x<ancho; x=x+30){
+        rect(x, largo/2, 20, 10)
     }
     
         
 }
     
-  text(score1+" puntos", 95, 50)
-  text(score2+" puntos", 240, 50)
+  text(score1+" puntos", (ancho/2)-135, 50)
+  text(score2+" puntos", (ancho/2)+20, 50)
 drawSprites();
   
 
